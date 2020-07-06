@@ -8,6 +8,7 @@ class TodoListTasks extends React.Component {
                 key={Math.random()}
                 task={task}
                 changeStatus={this.props.changeStatus}
+                changeTaskTitle={this.props.changeTaskTitle}
             />
         ));
 

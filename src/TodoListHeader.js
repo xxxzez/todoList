@@ -9,7 +9,7 @@ class TodoListHeader extends React.Component {
 
     onAddTaskClick = () => {
         let newText = this.state.title;
-        this.state.title = "";
+        this.setState({ title: "" });
         if (newText === "") {
             this.setState({ error: true });
         } else {
