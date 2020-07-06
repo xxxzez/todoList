@@ -26,6 +26,12 @@ class TodoListHeader extends React.Component {
         this.setState({ error: false });
     };
 
+    onKeyPressHandler = (event) => {
+        if (event.key === "Enter") {
+            this.onAddTaskClick();
+        }
+    };
+
     render = () => {
         let inputClass = this.state.error === true ? "error" : "";
         return (
@@ -33,6 +39,7 @@ class TodoListHeader extends React.Component {
                 <h3 className="todoList-header__title">What to Learn</h3>
                 <div className="todoList-newTaskForm">
                     <input
+                        onKeyPress={this.onKeyPressHandler}
                         onChange={this.onInputChange}
                         className={inputClass}
                         type="text"
