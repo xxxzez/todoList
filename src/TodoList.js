@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
-import TodoListHeader from "./TodoListHeader";
 import TodoListFooter from "./TodoListFooter";
 import TodoListTasks from "./TodoListTasks";
+import TodoListTitle from "./TodoListTitle";
+import AddNewItemForm from "./AddNewItemForm ";
 
 class App extends React.Component {
     state = {
@@ -78,10 +79,10 @@ class App extends React.Component {
     render = () => {
         return (
             <div className="todoList">
-                <TodoListHeader
-                    addTask={this.addTask}
-                    title={this.props.title}
-                />
+                <div className="todoList-header">
+                    <TodoListTitle title={this.props.title} />
+                    <AddNewItemForm addItem={this.addItem} />
+                </div>
                 <TodoListTasks
                     changeTaskTitle={this.changeTaskTitle}
                     changeStatus={this.changeStatus}
