@@ -1,4 +1,12 @@
-.App {}
+.App {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.todoList {
+  width: 300px;
+}
 
 .todoList {
   width: 500px;
