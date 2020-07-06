@@ -13,20 +13,46 @@ class App extends React.Component {
     state = {
         tasks: [],
         filterValue: "All",
+        nextTaskId: 0,
     };
 
-    // nextTaskId = this.state.tasks[this.state.tasks.length - 1].id + 1;
-    nextTaskId = 0;
+    componentDidMount() {
+        this.restoreState();
+    }
+
+    saveState = () => {
+        let stateAsString = JSON.stringify(this.state);
+        localStorage.setItem("our-state", stateAsString);
+    };
+
+    restoreState = () => {
+        let state = {
+            tasks: [],
+            filterValue: "All",
+            nextTaskId: 0,
+        };
+
+        let stateAsString = localStorage.getItem("our-state");
+        if (stateAsString !== null) {
+            state = JSON.parse(stateAsString);
+        }
+        this.setState(state);
+    };
+
     addTask = (newText) => {
         let newTask = {
-            id: this.nextTaskId,
+            id: this.state.nextTaskId,
             title: newText,
             isDone: false,
             priority: "high",
         };
-        this.nextTaskId++;
         let newTasks = [...this.state.tasks, newTask];
-        this.setState({ tasks: newTasks });
+        this.setState(
+            { tasks: newTasks, nextTaskId: this.state.nextTaskId + 1 },
+            () => {
+                this.saveState();
+            }
+        );
     };
 
     changeFilter = (newFilterValue) => {
