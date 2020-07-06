@@ -21,7 +21,9 @@ class TodoListTask extends React.Component {
                     checked={this.props.task.isDone}
                     onChange={this.onIsDoneChanged}
                 />
-                <span>{this.props.task.title}, </span>
+                <span>
+                    <b>{this.props.task.title}</b>,{" "}
+                </span>
                 <span>priority: {this.props.task.priority}</span>
             </div>
         );

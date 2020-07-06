@@ -2,18 +2,14 @@ import React from "react";
 import "./App.css";
 
 class TodoListHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.newTaskTitleRef = React.createRef();
-    }
-
     state = {
         error: false,
+        title: "",
     };
 
     onAddTaskClick = () => {
-        let newText = this.newTaskTitleRef.current.value;
-        this.newTaskTitleRef.current.value = "";
+        let newText = this.state.title;
+        this.state.title = "";
         if (newText === "") {
             this.setState({ error: true });
         } else {
@@ -22,8 +18,9 @@ class TodoListHeader extends React.Component {
         this.props.addTask(newText);
     };
 
-    onInputChange = () => {
+    onInputChange = (event) => {
         this.setState({ error: false });
+        this.setState({ title: event.currentTarget.value });
     };
 
     onKeyPressHandler = (event) => {
@@ -39,12 +36,12 @@ class TodoListHeader extends React.Component {
                 <h3 className="todoList-header__title">What to Learn</h3>
                 <div className="todoList-newTaskForm">
                     <input
+                        value={this.state.title}
                         onKeyPress={this.onKeyPressHandler}
                         onChange={this.onInputChange}
                         className={inputClass}
                         type="text"
                         placeholder="New task name"
-                        ref={this.newTaskTitleRef}
                     />
                     <button onClick={this.onAddTaskClick}>Add</button>
                 </div>
