@@ -21,6 +21,7 @@ class TodoListTask extends React.Component {
                     checked={this.props.task.isDone}
                     onChange={this.onIsDoneChanged}
                 />
+                <span>id: {this.props.task.id} - </span>
                 <span>
                     <b>{this.props.task.title}</b>,{" "}
                 </span>

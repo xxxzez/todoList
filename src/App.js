@@ -7,20 +7,23 @@ import TodoListTasks from "./TodoListTasks";
 class App extends React.Component {
     state = {
         tasks: [
-            { title: "JS", isDone: true, priority: "low" },
-            { title: "HTML", isDone: false, priority: "high" },
-            { title: "CSS", isDone: false, priority: "low" },
-            { title: "React", isDone: true, priority: "high" },
+            { id: 0, title: "JS", isDone: true, priority: "low" },
+            { id: 1, title: "HTML", isDone: false, priority: "high" },
+            { id: 2, title: "CSS", isDone: false, priority: "low" },
+            { id: 3, title: "React", isDone: true, priority: "high" },
         ],
         filterValue: "All",
     };
 
+    nextTaskId = this.state.tasks[this.state.tasks.length - 1].id;
     addTask = (newText) => {
         let newTask = {
+            id: this.nextTaskId + 1,
             title: newText,
             isDone: false,
             priority: "high",
         };
+        this.nextTaskId++;
         let newTasks = [...this.state.tasks, newTask];
         this.setState({ tasks: newTasks });
     };
@@ -31,9 +34,9 @@ class App extends React.Component {
         });
     };
 
-    changeStatus = (task, isDone) => {
+    changeStatus = (taskId, isDone) => {
         let newTasks = this.state.tasks.map((t) => {
-            if (t !== task) {
+            if (t.id !== taskId) {
                 return t;
             } else {
                 return { ...t, isDone: isDone };
