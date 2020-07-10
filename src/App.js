@@ -2,24 +2,53 @@ import React from "react";
 import "./App.css";
 import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm ";
-import TodoListTitle from "./TodoListTitle";
 
 class App extends React.Component {
     state = {
-        todolists: [
-            { id: 0, title: "First" },
-            { id: 1, title: "Second" },
-            { id: 2, title: "Third" },
-            { id: 3, title: "Forth" },
-        ],
+        todoLists: [],
+        nextTodoListId: 0,
     };
 
     addTodoList = (title) => {
-        alert(title);
+        let newTodoList = {
+            id: this.state.nextTodoListId,
+            title: title,
+        };
+        let newTodoLists = [...this.state.todoLists, newTodoList];
+        this.setState(
+            {
+                todoLists: newTodoLists,
+                nextTodoListId: this.state.nextTodoListId + 1,
+            },
+            () => {
+                this.saveState();
+            }
+        );
+    };
+
+    componentDidMount() {
+        this.restoreState();
+    }
+
+    saveState = () => {
+        let stateAsString = JSON.stringify(this.state);
+        localStorage.setItem("our-state-" + this.props.id, stateAsString);
+    };
+
+    restoreState = () => {
+        let state = {
+            todoLists: [],
+            nextTodoListId: 0,
+        };
+        let stateAsString = localStorage.getItem("our-state-" + this.props.id);
+        if (stateAsString !== null) {
+            state = JSON.parse(stateAsString);
+        }
+        this.setState(state);
     };
 
     render = () => {
-        let todoLists = this.state.todolists.map((tl) => (
+        let todoLists = this.state.todoLists.map((tl) => (
             <TodoList id={tl.id} title={tl.title} />
         ));
         return (
@@ -27,7 +56,7 @@ class App extends React.Component {
                 <div>
                     <AddNewItemForm addItem={this.addTodoList} />
                 </div>
-                <div className="App">{todoLists}</div>;
+                <div className="App">{todoLists}</div>
             </>
         );
     };
