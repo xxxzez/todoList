@@ -16,15 +16,17 @@ class App extends React.Component {
             title: title,
         };
         let newTodoLists = [...this.state.todoLists, newTodoList];
-        this.setState(
-            {
-                todoLists: newTodoLists,
-                nextTodoListId: this.state.nextTodoListId + 1,
-            },
-            () => {
-                this.saveState();
-            }
-        );
+        mapDispatchToProps(dispatchEvent);
+
+        // this.setState(
+        //     {
+        //         todoLists: newTodoLists,
+        //         nextTodoListId: this.state.nextTodoListId + 1,
+        //     },
+        //     () => {
+        //         this.saveState();
+        //     }
+        // );
     };
 
     componentDidMount() {

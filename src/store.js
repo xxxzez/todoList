@@ -14,6 +14,16 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "ADD-TODOLIST":
+            return {
+                ...state,
+                todoLists: [...state.todoLists, action.newTodoList],
+            };
+        default:
+    }
+
+    console.log("reducer: ", action);
     return state;
 };
 
