@@ -5,10 +5,6 @@ const initialState = {
         { id: 0, title: "React" },
         { id: 1, title: "incubator" },
         { id: 2, title: "Что купить" },
-        { id: 3, title: "" },
-        { id: 4, title: "" },
-        { id: 5, title: "React" },
-        { id: 6, title: "asd" },
     ],
     nextTodoListId: 7,
 };
